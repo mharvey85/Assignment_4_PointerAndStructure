@@ -1,4 +1,4 @@
-//Copied from assignment 4 canvas page
+//Copied from canvas Assignment 4 page
 #ifndef ITEM_H
 #define ITEM_H
 

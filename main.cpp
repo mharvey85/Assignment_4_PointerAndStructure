@@ -10,11 +10,6 @@ double average_price(Item *item_list, int size);
 void print_items(Item *item_list, int size);
 
 
-//Modify the main function to take command line arguments
-//Assume the user will run the program like: ./main 14512
-//Use the argument given in the command line (14512 in above) as the SKU to search for
-//Find the item in your item list using a while loop and print the item to the screen
-//If not found, print item not found
 int main(){
     //Allocating memory space for 5 items
     Item *item_list = (Item*)malloc(sizeof(Item) * 5);
