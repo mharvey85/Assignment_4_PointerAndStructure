@@ -1,4 +1,3 @@
-#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,7 +9,14 @@ double average_price(Item *item_list, int size);
 void print_items(Item *item_list, int size);
 
 
-int main(){
+int main(int argc, char *argv[]){
+
+    //checking if user input was given
+    if (argc < 2){
+        printf("Error: Missing SKU number\n");
+        return 1;
+    }
+
     //Allocating memory space for 5 items
     Item *item_list = (Item*)malloc(sizeof(Item) * 5);
 
@@ -19,7 +25,24 @@ int main(){
     add_item(item_list, 3.95, "79862", "dairy", "milk", 1);
     add_item(item_list, 7.35, "12345", "meat", "bacon", 2);
 
-    print_items(item_list, 3);
+    //converting SKU number given by user to int 
+    int sku_num = atoi(argv[1]);
+    
+    int found = 0;
+    int index = 0;    
+    while(index < 3){
+        if ( atoi(item_list[index].sku) == sku_num){
+            print_items(&item_list[index], 1);
+            found = 1;
+            break;
+        }
+        index++;
+    }
+    if (!found){
+        printf("Item not found");
+    }
+
+    //print_items(item_list, 3);
 
     free_items(item_list, 3);
   
@@ -34,13 +57,13 @@ void add_item(Item *item_list, double price, char *sku, char *category, char *na
     item_list[index].price = price;
 
     //allocating space and assigning given char array to given index in item_list
-    item_list[index].sku = (char*)malloc(sizeof(strlen(sku)+1));
+    item_list[index].sku = (char*)malloc(strlen(sku)+1);
     strcpy(item_list[index].sku, sku);
 
-    item_list[index].category = (char*)malloc(sizeof(strlen(category)+1));
+    item_list[index].category = (char*)malloc(strlen(category)+1);
     strcpy(item_list[index].category, category);
 
-    item_list[index].name = (char*)malloc(sizeof(strlen(name)+1));
+    item_list[index].name = (char*)malloc(strlen(name)+1);
     strcpy(item_list[index].name, name);
 }
 
